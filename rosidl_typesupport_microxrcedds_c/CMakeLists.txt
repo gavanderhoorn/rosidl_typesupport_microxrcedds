@@ -59,7 +59,8 @@ target_compile_options(${PROJECT_NAME}
   PRIVATE
     $<$<C_COMPILER_ID:GNU>:-Wall>
     $<$<C_COMPILER_ID:GNU>:-Wextra>
-    $<$<C_COMPILER_ID:GNU>:-Wpedantic>
+    $<$<AND:$<C_COMPILER_ID:GNU>,$<NOT:$<VERSION_LESS:$<C_COMPILER_VERSION>,4.8.0>>>:-Wpedantic>
+    $<$<AND:$<C_COMPILER_ID:GNU>,$<VERSION_LESS:$<C_COMPILER_VERSION>,4.8.0>>:-pedantic>
   )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
